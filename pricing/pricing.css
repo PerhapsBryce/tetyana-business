@@ -52,3 +52,19 @@ main::before {
     bottom: -8px;
     content: " ";
 }
+
+.pricing-pic {
+    width: calc(100% + 5rem);
+    background-image: url('../assets/pricing.jpg');
+    aspect-ratio: 16/9;
+    background-position: 50% 60%;
+    background-size: cover;
+    filter: brightness(0.5);
+}
+
+.pricing-text {
+    z-index: 10;
+    background-color: var(--secondary);
+    width: calc(100% + 3rem);
+    padding: 2rem;
+}
