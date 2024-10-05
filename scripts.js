@@ -15,13 +15,19 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 })
 
+const PARALLAX_SENSITIVITY = 0.2
 window.addEventListener('scroll', function () {
-    const parallax = document.querySelector('.pricing-pic');
-    if (!parallax) return
+    const image = document.querySelector('.pricing-pic');
+    if (!image) return
 
-    let scrollPosition = window.scrollY;
+    const scrollPosition = window.scrollY;
 
-    parallax.style.transform = `translateY(${scrollPosition * 0.2}px)`;
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercentage = scrollPosition / maxScroll;
+
+    const panY = (scrollPercentage - PARALLAX_SENSITIVITY) * 100;
+
+    image.style.transform = `translateY(${Math.max(panY, 0)}%)`;
 });
 
 function changeNavSig() {

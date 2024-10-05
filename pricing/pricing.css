@@ -55,10 +55,12 @@ main::before {
 
 .pricing-pic {
     width: calc(100% + 5rem);
+    height: 150%;
     background-image: url('../assets/pricing.jpg');
     aspect-ratio: 16/9;
     background-position: 50% 60%;
     background-size: cover;
+    transform: translateX(0) translateY(0);
     filter: brightness(0.5);
 }
 
