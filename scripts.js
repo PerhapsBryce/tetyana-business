@@ -15,21 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 })
 
-const PARALLAX_SENSITIVITY = 0.2
-window.addEventListener('scroll', function () {
-    const image = document.querySelector('.pricing-pic');
-    if (!image) return
-
-    const scrollPosition = window.scrollY;
-
-    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-    const scrollPercentage = scrollPosition / maxScroll;
-
-    const panY = (scrollPercentage - PARALLAX_SENSITIVITY) * 100;
-
-    image.style.transform = `translateY(${Math.max(panY, 0)}%)`;
-});
-
 function changeNavSig() {
     const signature = document.querySelector('.nav-sig')
 

@@ -61,7 +61,7 @@ main::before {
     background-position: 50% 60%;
     background-size: cover;
     transform: translateX(0) translateY(0);
-    filter: brightness(0.5);
+    border: solid 1rem var(--primary);
 }
 
 .pricing-text {
