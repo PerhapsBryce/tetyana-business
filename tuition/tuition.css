@@ -7,7 +7,7 @@ body {
     flex-direction: column;
 }
 
-#pricing {
+#tuition {
     border-bottom: solid 1px var(--primary-font);
     height: fit-content;
 }
