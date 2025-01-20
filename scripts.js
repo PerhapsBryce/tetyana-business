@@ -38,7 +38,8 @@ const VIDEOS = [
     `https://www.youtube.com/embed/6V9zreejkFU${YOUTUBE_IFRAME_PARAMS}`,
     `https://www.youtube.com/embed/g5i6vgihJZU${YOUTUBE_IFRAME_PARAMS}`,
     `https://www.youtube.com/embed/wNzd5q0FLuA${YOUTUBE_IFRAME_PARAMS}`,
-    `https://www.youtube.com/embed/agjcJ3kEJbY${YOUTUBE_IFRAME_PARAMS}`
+    `https://www.youtube.com/embed/agjcJ3kEJbY${YOUTUBE_IFRAME_PARAMS}`,
+    `https://www.youtube.com/embed/rOU_SuskmGE${YOUTUBE_IFRAME_PARAMS}`
 ]
 let currentVideoId = 0
 function highlightCurrentSelectedVideoSelector() {
