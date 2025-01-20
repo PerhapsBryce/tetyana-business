@@ -11,14 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     highlightCurrentSelectedVideoSelector()
-    window.addEventListener("mousedown", ev => {
-        if (!ev?.target || !ev.target.matches(".video-selector")) return
-
-        const selectedVideoIndex = ev.target.dataset.videoid
-        currentVideoId = selectedVideoIndex
-
-        highlightCurrentSelectedVideoSelector()
-        changeVideo(VIDEOS[selectedVideoIndex])
+    window.addEventListener("mousedown", changeSelectedVideo)
+    window.addEventListener("keydown", (ev) => {
+        if (ev.key !== "Enter" && ev.key !== " ") return
+        changeSelectedVideo(ev)
     })
 })
 
@@ -62,4 +58,13 @@ function changeVideo(src) {
 
     youtubeIframe.src = src
 
+}
+function changeSelectedVideo(ev) {
+    if (!ev?.target || !ev.target.matches(".video-selector")) return
+
+    const selectedVideoIndex = ev.target.dataset.videoid
+    currentVideoId = selectedVideoIndex
+
+    highlightCurrentSelectedVideoSelector()
+    changeVideo(VIDEOS[selectedVideoIndex])
 }
