@@ -47,6 +47,7 @@ main {
 
 .video-container {
     position: relative;
+    width: 100%;
 }
 
 .video-selector-container {
@@ -74,6 +75,9 @@ main {
 
 iframe {
     border: solid 4px var(--quaternary);
+    /* height: 15rem; */
+    width: 100%;
+    aspect-ratio: 16/9;
 }
 
 @media (min-width: 1024px) {
