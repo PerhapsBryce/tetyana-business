@@ -75,7 +75,6 @@ main {
 
 iframe {
     border: solid 4px var(--quaternary);
-    /* height: 15rem; */
     width: 100%;
     aspect-ratio: 16/9;
 }
