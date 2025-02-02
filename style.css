@@ -272,36 +272,6 @@
     gap: 1rem;
 }
 
-.icon-container {
-    display: flex;
-    gap: 1rem;
-}
-
-#facebook-icon {
-    background: url('./assets/facebook.png');
-    background-size: cover;
-    display: block;
-    height: 24px;
-    aspect-ratio: 1/1;
-}
-
-#instagram-icon {
-    background: url('./assets/instagram.png');
-    background-size: cover;
-    display: block;
-    height: 24px;
-    aspect-ratio: 1/1;
-}
-
-#linkedin-icon {
-    background: url('./assets/linkedin.png');
-    background-size: cover;
-    display: block;
-    height: 24px;
-    aspect-ratio: 1/1;
-}
-
-
 @media (min-width: 1024px) {
     .img-container {
         display: block;
