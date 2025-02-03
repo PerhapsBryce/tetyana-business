@@ -38,6 +38,7 @@ async function getVideos() {
 
     changeVideo(`https://www.youtube.com/embed/${videos[0]}${YOUTUBE_IFRAME_PARAMS}`)
     addVideoButtons(videos)
+    highlightCurrentSelectedVideoSelector(videos[0])
 }
 
 function addVideoButtons(videos) {
