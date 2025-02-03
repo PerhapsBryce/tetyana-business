@@ -32,6 +32,8 @@ function addVideoButtons(videos) {
     const videoContainer = document.querySelector(".video-selector-container")
 
     for (let video of videos) {
+        if (!video) continue
+
         const button = document.createElement("button")
         button.setAttribute('class', "video-selector")
         button.setAttribute('data-videoId', video)
