@@ -1,5 +1,14 @@
 const YOUTUBE_IFRAME_PARAMS = "?rel=0"
 
+const staticVideoIds = [
+    "6V9zreejkFU",
+    "g5i6vgihJZU"
+]
+
+const studentVideoIds = [
+    "DjK6gP_c-4U"
+]
+
 document.addEventListener('DOMContentLoaded', () => {
     getVideos()
 
@@ -21,7 +30,10 @@ async function getVideos() {
     const youtubeResponse = await fetch(url)
         .then(response => response.json())
 
-    const videos = youtubeResponse.items.map(item => item.id.videoId)
+    const videos = [
+        ...(youtubeResponse?.items || []).map(item => item.id.videoId),
+        ...staticVideoIds
+    ]
     if (videos.length === 0) return
 
     changeVideo(`https://www.youtube.com/embed/${videos[0]}${YOUTUBE_IFRAME_PARAMS}`)
