@@ -36,18 +36,37 @@
       </header>
 
       <main>
-        <p>
+        <p class="media-container">
           <span class="video-container">
+            <span class="media-title">Watch Tetyana Play</span>
             <iframe
               id="youtube-iframe"
               src=""
+              data-artist="tetyana"
               title="YouTube video player"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerpolicy="strict-origin-when-cross-origin"
               allowfullscreen
             ></iframe>
-            <span class="video-selector-container"> </span>
+            <span class="video-selector-container" data-artist="tetyana">
+            </span>
+          </span>
+
+          <span class="video-container">
+            <span class="media-title">Watch Tetyana's Students Play</span>
+            <iframe
+              id="youtube-iframe"
+              src=""
+              data-artist="student"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+            <span class="video-selector-container" data-artist="student">
+            </span>
           </span>
         </p>
       </main>

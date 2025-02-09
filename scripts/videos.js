@@ -1,6 +1,6 @@
 const YOUTUBE_IFRAME_PARAMS = "?rel=0"
 
-const staticVideoIds = [
+const tetyanaStaticVideoIds = [
     "6V9zreejkFU",
     "g5i6vgihJZU"
 ]
@@ -9,81 +9,152 @@ const studentVideoIds = [
     "DjK6gP_c-4U"
 ]
 
+const tetyanaPlaylistId = "PLmhPBkbAFzCMoIuVB-Z5OM0twWVR2jc62"
+const studentPlaylistId = "PLmhPBkbAFzCMBzkofa7SnjtZDc-cwetPI"
+
 document.addEventListener('DOMContentLoaded', () => {
     getVideos()
 
     highlightCurrentSelectedVideoSelector()
-    window.addEventListener("mousedown", changeSelectedVideo)
+    window.addEventListener("mousedown", (ev) => {
+        changeSelectedTetyanaVideo(ev)
+        changeSelectedStudentVideo(ev)
+    })
     window.addEventListener("keydown", (ev) => {
         if (ev.key !== "Enter" && ev.key !== " ") return
-        changeSelectedVideo(ev)
+        changeSelectedTetyanaVideo(ev)
+        changeSelectedStudentVideo(ev)
     })
 })
 
 async function getVideos() {
     const apiKey = "AIzaSyC5_4P-1dISsj4xQt6-CJdrPh7Rbuk-C6k"
-    const channelId = "UC2zHdOkpUlg3DmO_O7tMkwg"
-    const maxVideos = 5
+    const maxVideos = 10
 
-    const url = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=date&maxResults=${maxVideos}`
-
-    const youtubeResponse = await fetch(url)
+    const tetyanaYoutubeResponse = await fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=${maxVideos}&playlistId=${tetyanaPlaylistId}&key=${apiKey}`)
+        .then(response => response.json())
+    const studentYoutubeResponse = await fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=${maxVideos}&playlistId=${studentPlaylistId}&key=${apiKey}`)
         .then(response => response.json())
 
-    const videos = [
-        ...(youtubeResponse?.items || []).map(item => item.id.videoId),
-        ...staticVideoIds
+    const tetyanaVideos = [
+        ...(tetyanaYoutubeResponse?.items || []).map(item => item.snippet.resourceId.videoId),
+        ...tetyanaStaticVideoIds
     ]
-    if (videos.length === 0) return
+    const studentVideos = (studentYoutubeResponse?.items || []).map(item => item.snippet.resourceId.videoId)
 
-    changeVideo(`https://www.youtube.com/embed/${videos[0]}${YOUTUBE_IFRAME_PARAMS}`)
-    addVideoButtons(videos)
-    highlightCurrentSelectedVideoSelector(videos[0])
+    addVideoButtons(tetyanaVideos, studentVideos)
+
+    changeTetyanaVideo(`https://www.youtube.com/embed/${tetyanaVideos[0]}${YOUTUBE_IFRAME_PARAMS}`)
+    highlightCurrentSelectedTetyanaVideoSelector(tetyanaVideos[0])
+
+    changeStudentVideo(`https://www.youtube.com/embed/${studentVideos[0]}${YOUTUBE_IFRAME_PARAMS}`)
+    highlightCurrentSelectedStudentVideoSelector(studentVideos[0])
 }
 
-function addVideoButtons(videos) {
-    const videoContainer = document.querySelector(".video-selector-container")
+function addVideoButtons(tetyanaVideos, studentVideos) {
+    const tetyanaVideoContainer = document.querySelector(`.video-selector-container[data-artist="tetyana"]`)
 
-    for (let video of videos) {
+    for (let video of tetyanaVideos) {
         if (!video) continue
 
         const button = document.createElement("button")
         button.setAttribute('class', "video-selector")
         button.setAttribute('data-videoId', video)
+        button.setAttribute('data-artist', "tetyana")
 
-        videoContainer.appendChild(button)
+        tetyanaVideoContainer.appendChild(button)
+    }
+
+    const studentVideoContainer = document.querySelector(`.video-selector-container[data-artist="student"]`)
+
+    for (let video of studentVideos) {
+        if (!video) continue
+
+        const button = document.createElement("button")
+        button.setAttribute('class', "video-selector")
+        button.setAttribute('data-videoId', video)
+        button.setAttribute('data-artist', "student")
+
+        studentVideoContainer.appendChild(button)
     }
 }
 
-function highlightCurrentSelectedVideoSelector(selectedId) {
-    const currentHighlightedItem = document.querySelector(".selected-video")
+function highlightCurrentSelectedVideoSelector(tetyanaSelectedId, studentSelectedId) {
+    const tetyanaCurrentHighlightedItem = document.querySelector(`.selected-video[data-artist="tetyana"`)
+    if (tetyanaCurrentHighlightedItem) {
+        tetyanaCurrentHighlightedItem.classList.remove("selected-video")
+    }
+
+    const studentCurrentHighlightedItem = document.querySelector(`.selected-video[data-artist="student"`)
+    if (studentCurrentHighlightedItem) {
+        studentCurrentHighlightedItem.classList.remove("selected-video")
+    }
+
+    if (tetyanaSelectedId) {
+        const selectedVideoSelector = document.querySelector(`[data-videoId="${tetyanaSelectedId}"][data-artist="tetyana"]`)
+        if (!selectedVideoSelector) return
+
+        selectedVideoSelector.classList.add("selected-video")
+    }
+}
+
+function highlightCurrentSelectedStudentVideoSelector(selectedId) {
+    const currentHighlightedItem = document.querySelector(`.selected-video[data-artist="student"`)
     if (currentHighlightedItem) {
         currentHighlightedItem.classList.remove("selected-video")
     }
 
-    const selectedVideoSelector = document.querySelector(`[data-videoId="${selectedId}"]`)
+    const selectedVideoSelector = document.querySelector(`[data-videoId="${selectedId}"][data-artist="student"]`)
     if (!selectedVideoSelector) return
 
     selectedVideoSelector.classList.add("selected-video")
 }
-function changeVideo(src) {
-    const youtubeIframe = document.querySelector('#youtube-iframe')
+function changeStudentVideo(src) {
+    const youtubeIframe = document.querySelector('#youtube-iframe[data-artist="student"]')
     if (!youtubeIframe) return
 
     youtubeIframe.src = src
-
 }
-function changeSelectedVideo(ev) {
+function changeSelectedStudentVideo(ev) {
     const YOUTUBE_IFRAME_PARAMS = "?rel=0"
 
-    if (!ev?.target || !ev.target.matches(".video-selector")) return
+    if (!ev?.target || !ev.target.matches(`.video-selector[data-artist="student"]`)) return
 
     const selectedVideoId = ev.target.dataset.videoid
     if (!selectedVideoId) return
 
     const videoUrl = `https://www.youtube.com/embed/${selectedVideoId}${YOUTUBE_IFRAME_PARAMS}`
-    highlightCurrentSelectedVideoSelector()
-    changeVideo(videoUrl)
+    changeStudentVideo(videoUrl)
+    highlightCurrentSelectedStudentVideoSelector(selectedVideoId)
+}
 
-    highlightCurrentSelectedVideoSelector(selectedVideoId)
+
+function highlightCurrentSelectedTetyanaVideoSelector(selectedId) {
+    const currentHighlightedItem = document.querySelector(`.selected-video[data-artist="tetyana"`)
+    if (currentHighlightedItem) {
+        currentHighlightedItem.classList.remove("selected-video")
+    }
+
+    const selectedVideoSelector = document.querySelector(`[data-videoId="${selectedId}"][data-artist="tetyana"]`)
+    if (!selectedVideoSelector) return
+
+    selectedVideoSelector.classList.add("selected-video")
+}
+function changeTetyanaVideo(src) {
+    const youtubeIframe = document.querySelector('#youtube-iframe[data-artist="tetyana"]')
+    if (!youtubeIframe) return
+
+    youtubeIframe.src = src
+}
+function changeSelectedTetyanaVideo(ev) {
+    const YOUTUBE_IFRAME_PARAMS = "?rel=0"
+
+    if (!ev?.target || !ev.target.matches(`.video-selector[data-artist="tetyana"]`)) return
+
+    const selectedVideoId = ev.target.dataset.videoid
+    if (!selectedVideoId) return
+
+    const videoUrl = `https://www.youtube.com/embed/${selectedVideoId}${YOUTUBE_IFRAME_PARAMS}`
+    changeTetyanaVideo(videoUrl)
+    highlightCurrentSelectedTetyanaVideoSelector(selectedVideoId)
 }
