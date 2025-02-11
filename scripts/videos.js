@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function getVideos() {
     const apiKey = "AIzaSyC5_4P-1dISsj4xQt6-CJdrPh7Rbuk-C6k"
-    const maxVideos = 10
+    const maxVideos = 20
 
     const tetyanaYoutubeResponse = await fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=${maxVideos}&playlistId=${tetyanaPlaylistId}&key=${apiKey}`)
         .then(response => response.json())
