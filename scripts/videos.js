@@ -9,7 +9,7 @@ const studentVideoIds = [
     "DjK6gP_c-4U"
 ]
 
-const tetyanaPlaylistId = "PLmhPBkbAFzCMoIuVB-Z5OM0twWVR2jc62"
+const tetyanaPlaylistId = "PLmhPBkbAFzCPNrcdhYey-WPV3AtJdmxOu"
 const studentPlaylistId = "PLmhPBkbAFzCMBzkofa7SnjtZDc-cwetPI"
 
 document.addEventListener('DOMContentLoaded', () => {
