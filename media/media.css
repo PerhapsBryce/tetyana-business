@@ -109,3 +109,33 @@ iframe {
         padding: 2rem;
     }
 }
+
+.image-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin: 4rem auto;
+    background-color: var(--secondary);
+    padding: 2rem;
+    border: solid 1rem var(--quaternary);
+    position: relative;
+}
+.image-container::before {
+          border: solid 1rem var(--primary);
+    position: absolute;
+    z-index: 1;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    content: " ";
+}
+.image-container img {
+ object-fit: contain;
+ background-repeat: no-repeat;   
+ max-height: 20rem;
+ border: solid 4px black;
+ border-radius: 1rem;
+}
