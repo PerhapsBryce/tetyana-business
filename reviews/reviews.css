@@ -1,0 +1,61 @@
+@import url('../style.css');
+
+body {
+    background-color: var(--primary);
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+header {
+  padding: 2rem 3rem;
+}
+
+main {
+      flex: 1 1 0%;
+    margin-bottom: 5rem;
+}
+
+#reviews-link {
+      border-bottom: solid 1px var(--primary-font);
+    height: fit-content;
+}
+
+main > section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    margin: 4rem auto;
+    background-color: var(--secondary);
+    padding: 2rem;
+    width: 100%;
+    border: solid 1rem var(--quaternary);
+    position: relative;
+}
+
+main > section::before {
+      border: solid 1rem var(--primary);
+    position: absolute;
+    z-index: 1;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    content: " ";
+}
+
+.review {
+  max-width: 65ch;
+}
+
+.top-quote {
+  font-size: xx-large; 
+}
+.bottom-quote {
+  display: block;
+  font-size: xx-large; 
+  text-align: right; 
+  width: 100%;
+}
